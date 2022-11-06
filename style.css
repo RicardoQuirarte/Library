@@ -1,0 +1,36 @@
+* {
+    padding-top: 25px;
+}
+
+#container {
+    background-color: tomato;
+    display: flex;
+    width: auto;
+}
+
+div {
+    border: solid 1px purple;
+}
+
+.bookCard {
+    background-color: white;
+    width: 200px;
+    font-size: 1.2rem;
+    border-radius: 5%;
+}
+
+div.bookCard {
+    border: solid 1px salmon;
+}
+
+
+
+
+
+
+
+/* div::before {
+    content: 'TITLE';
+    color: aqua;
+} */
+
