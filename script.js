@@ -19,6 +19,9 @@ function getBookFromInput() {
   return new Book(title, author, genre, rating, pages, read);
 }
 
+const submitBook = document.querySelector('#submitBook');
+submitBook.addEventListener('click', addBookToLibrary);
+
 function addBookToLibrary(e) {
   const userBook = getBookFromInput();
   myLibrary.push(userBook);
@@ -26,20 +29,31 @@ function addBookToLibrary(e) {
   e.preventDefault();
 }
 
-const submitBook = document.querySelector('#submitBook');
-submitBook.addEventListener('click', addBookToLibrary);
 
 
-
-const newBookButton = document.querySelector('#newBook');
-newBookButton.addEventListener('click', displayBooks);
+const newBookButton = document.querySelector('#newBookButton');
+const popUpForm = document.querySelector('.popUpForm');
 const container = document.querySelector('#container');
 
+newBookButton.addEventListener('click', openPopUp);
+window.addEventListener('mouseup', closePopUp)
+
+function openPopUp () {
+  container.classList.add('blur');
+  popUpForm.classList.add('openPopUp');
+}
+
+function closePopUp (e) {
+  if (e.target != popUpForm && e.target.parentNode != popUpForm) {
+    container.classList.remove('blur');
+    popUpForm.classList.remove('openPopUp')
+  }
+}
+
+
+
 function displayBooks () {
-
-
   for (const books of myLibrary) {
-
     const divFather = document.createElement('div');
     divFather.classList.add('bookCard');
 
@@ -60,59 +74,11 @@ function displayBooks () {
     divFather.appendChild(divFour);
 
     container.appendChild(divFather);
-    
     console.log(`${books.title}`);
   }
 
-  // myLibrary.forEach((element) => {
-
-  //   let title = element.title;
-  //   let author = element.author;
-  //   let genre = element.genre;
-  //   let pages = element.pages;
-  //   const div = document.createElement('div');
-  //   container.textContent = `${title}: ${title}`;
-  //   container.appendChild(div);
-  //   div.textContent = `${author}`
-  //   const divTwo = document.createElement('div');
-  //   divTwo.textContent = `${genre}`
-  //   container.appendChild(divTwo);
-  //   const divThree = document.createElement('div');
-  //   divThree.textContent = `${pages}`
-  //   container.appendChild(divThree);
-  //   console.log(`${title}`);
-  // });
-
-  // for (let i = 0; i < myLibrary.length; i++) {
-  //   container.textContent = `${myLibrary.title}`;
-  //   const div = document.createElement('div');
-  //   container.appendChild(div);
-  //   div.textContent = `${myLibrary.author}`
-  //   const divTwo = document.createElement('div');
-  //   divTwo.textContent = `${myLibrary.genre}`
-  //   container.appendChild(divTwo);
-  //   const divThree = document.createElement('div');
-  //   divThree.textContent = `${myLibrary.pages}`
-  //   container.appendChild(divThree);
-  //   const divFour = document.createElement('div');
-  //   divFour.textContent = `${myLibrary.read}`
-  //   container.appendChild(divFour);
-  //   console.log(`${myLibrary.title}`);
-  // }
-
-  // for (let i = 0; i < myLibrary.length; i++) {
-  //   const bookCard = document.createElement('div');
-  //   bookCard.classList.add('bookCard')
-  //   container.appendChild(bookCard);
-  //   const jsonClean = JSON.stringify(myLibrary[i], null, 1);
-  //   const unquoted = jsonClean.replace(/["{}]/g, ' ');
-  //   bookCard.textContent = unquoted;
-  //   console.table(myLibrary[i]);
-  //   }
- 
-
-
 }
+
 addEventListener('load', displayBooks);
 
 
@@ -120,17 +86,11 @@ addEventListener('load', displayBooks);
 
 
 
-function displayBookss () {
-  for (books in myLibrary) {
-      console.log(books)
-    }
-}
+// const theWayOfKings = new Book('The way of kings', 'Brandon Sanderson', 'Epic fantasy', '5', 1007, true)
+// const dracula = new Book('Dracula', 'Bram Stoker', 'Terror', '4', 496, false)
 
+// myLibrary.push(theWayOfKings, dracula);
 
-const theWayOfKings = new Book('The way of kings', 'Brandon Sanderson', 'Epic fantasy', '5', 1007, true)
-const dracula = new Book('Dracula', 'Bram Stoker', 'Terror', '4', 496, false)
-
-myLibrary.push(theWayOfKings, dracula);
 
 
 
