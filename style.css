@@ -2,6 +2,7 @@
 
 * {
     --blue: #1A5276;
+    --grey: #e6ebee;
   }
 
 body {
@@ -11,30 +12,7 @@ body {
     background: linear-gradient(90deg, #1A5276, pink);
 }
 
-#containerCards {
-    display: flex;
-    width: auto;
-    border: none;
-}
-
-/* div {
-    border: solid 1px purple;
-} */
-
-.bookCard {
-    background-color: white;
-    width: 200px;
-    font-size: 1.2rem;
-    border-radius: 5%;
-}
-
-div.bookCard {
-    border: solid 1px salmon;
-}
-
-
-
-#newBookButton {
+.newBookButton {
     border-radius: 50%;
     height: 275px;
     width: 275px;
@@ -44,15 +22,14 @@ div.bookCard {
     border: solid 2px #D5DBDB;
 }
 
-#newBookButton:hover {
+.newBookButton:hover {
     border: solid 2px pink;
 }
 
-#newBookButton:active {
+.newBookButton:active {
     color: pink;
     transform: translate(2px, 2px);
 }
-
 
 h1 {
     display: grid;
@@ -62,11 +39,6 @@ h1 {
     background-color: pink;
 }
 
-
-
-
-
-
 .popUpForm {
     display: flex;
     flex-direction: column;
@@ -75,17 +47,17 @@ h1 {
     background: white;
     padding: 10px;
     border-radius: 6px;
-    border: solid 2px pink;
+    border: solid 1px rgb(245, 113, 135);
     color: #1A5276;
     background-color: #f6f9fa;
-
+    width: 250px;
     visibility: hidden;
     position: absolute;
     top: 0%;
     left: 0%;
     transform: translate(-50%, -50%) scale(0.1);
     z-index: 1;
-    transition: transform 1s, top 1s, left 1s;   
+    transition: transform 1s, top 1s, left 1s;
 }
 
 h4 {
@@ -94,15 +66,19 @@ h4 {
 
 input {
     margin-bottom: 20px;
-    width: 200px;
+    width: 225px;
     background-color: #e6ebee;
     border: solid 1px pink;
-    height: 17px;
+    height: 20px;
 }
 
 input:focus {
     outline: none;
-    border: solid 1px green;
+    background-color: white;
+}
+
+input:hover {
+    background-color: white;
 }
 
 .openPopUp {
@@ -116,31 +92,77 @@ input:focus {
     filter: blur(5px);   
 }
 
+.moveContainer {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    transform: translate(-50%, -50%) scale(0.7);
+    transition-duration: 1.5s;
+}
+
+#containerCards {
+    display: flex;
+    width: auto;
+    border: none;
+}
+.changePosition {
+    margin-top: 15vh;
+    transition-duration: 1.5s;
+    height: 40vh;
+}
+
+.bookCard {
+    background-image: url('books.jpg');
+    background-size: 500px;
+    color: white;
+    width: 250px;
+    font-size: 1.4rem;
+    border-radius: 5%;
+    margin: 25px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bookCard > div{
+    width: 220px;
+    display: grid;
+    place-content: center;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    background-color: rgba(0,0,0, 0.5);
+}
+
+.read {
+    width: 50px;
+    height: 30px;
+    accent-color: green;
+}
 
 
+#submitBook {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    font-family: 'Zen Antique Soft', serif;
+    font-size: 1.2rem;
+    font-weight: lighter;
+    border: solid 1px var(--blue);
+    color: var(--blue);
+    background-color: white;
+}
 
+#submitBook:disabled {
+    color: #e6ebee;
+    border: solid 1px var(--grey);
+}
 
+.bookNotRead {
+    border: none
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* div::before {
-    content: 'TITLE';
-    color: aqua;
-} */
-
+.bookRead {
+    border: solid 3px green;
+}

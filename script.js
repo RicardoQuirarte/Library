@@ -19,19 +19,80 @@ function getBookFromInput() {
   return new Book(title, author, genre, rating, pages, read);
 }
 
+const containerCards = document.querySelector('#containerCards');
 const submitBook = document.querySelector('#submitBook');
 submitBook.addEventListener('click', addBookToLibrary);
 
+const required = [...document.querySelectorAll('.required')];
+required.forEach(input => input.oninput = e =>
+  submitBook.disabled = !required.every(input => input.value.length > 0));
+  
 function addBookToLibrary(e) {
   const userBook = getBookFromInput();
   myLibrary.push(userBook);
-  console.log(myLibrary)
-  e.preventDefault();
+  showBooks();
+  displayBooks();
+}
+
+function showBooks () {
+  container.classList.remove('blur');
+  popUpForm.classList.remove('openPopUp')
+  container.classList.add('moveContainer');
+  containerCards.classList.add('changePosition');
+}
+
+const checkbox = document.querySelector('.read');
+
+function displayBooks () {
+  for (const books of myLibrary.slice(-1)) {
+    const divFather = document.createElement('div');
+    divFather.classList.add('bookCard');
+    const divOne = document.createElement('div');
+    divOne.textContent = books.title;
+    divFather.appendChild(divOne);
+    const div = document.createElement('div');
+    div.textContent = books.author;
+    divFather.appendChild(div);
+    const divTwo = document.createElement('div');
+    divTwo.textContent = books.genre;
+    divFather.appendChild(divTwo);
+    const divThree = document.createElement('div');
+    divThree.textContent = books.pages;
+    divFather.appendChild(divThree);
+    const divFour = document.createElement('input');
+    divFour.setAttribute('type', 'checkbox');
+    divFour.classList.add('read');
+    if (checkbox.checked == true) {
+      divFour.checked = true;
+      divFather.classList.add('bookRead');
+    } else {
+      divFather.classList.add('bookNotRead');
+    }
+    divFour.addEventListener('click', () => {
+      if (divFour.checked == true) {
+      divFather.classList.add('bookRead');
+      } else if (divFour.checked == false) {
+        divFather.classList.remove('bookRead')
+        divFather.classList.add('bookNotRead');
+      }
+    })
+    divFather.appendChild(divFour);
+    containerCards.appendChild(divFather);
+  }
 }
 
 
+  // divFour.addEventListener('click', toggleRead);
 
-const newBookButton = document.querySelector('#newBookButton');
+  // Book.prototype.toggleRead = function() {
+  //   if (divFour.checkbox == true) {
+  //     divFather.classList.add('bookRead')
+  //   }
+  // }
+
+
+  
+const newBookButton = document.querySelector('.newBookButton');
 const popUpForm = document.querySelector('.popUpForm');
 const container = document.querySelector('#container');
 
@@ -50,51 +111,22 @@ function closePopUp (e) {
   }
 }
 
+const theWayOfKings = new Book('The way of kings', 'Brandon Sanderson', 'Epic fantasy', '5', 1007, true)
+myLibrary.push(theWayOfKings);
+console.log(theWayOfKings.read)
 
 
-function displayBooks () {
-  for (const books of myLibrary) {
-    const divFather = document.createElement('div');
-    divFather.classList.add('bookCard');
-
-    const divOne = document.createElement('div');
-    divOne.textContent = `${books.title}`
-    divFather.appendChild(divOne);
-    const div = document.createElement('div');
-    div.textContent = `${books.author}`
-    divFather.appendChild(div);
-    const divTwo = document.createElement('div');
-    divTwo.textContent = `${books.genre}`
-    divFather.appendChild(divTwo);
-    const divThree = document.createElement('div');
-    divThree.textContent = `${books.pages}`
-    divFather.appendChild(divThree);
-    const divFour = document.createElement('div');
-    divFour.textContent = `${books.read}`
-    divFather.appendChild(divFour);
-
-    container.appendChild(divFather);
-    console.log(`${books.title}`);
-  }
-
+Book.prototype.toggleRead = function(user) {
+let filtered = myLibrary.filter(item => item.user === user);
+filtered.map(item => item.read = false);
 }
 
-addEventListener('load', displayBooks);
 
 
-
-
-
-
-// const theWayOfKings = new Book('The way of kings', 'Brandon Sanderson', 'Epic fantasy', '5', 1007, true)
-// const dracula = new Book('Dracula', 'Bram Stoker', 'Terror', '4', 496, false)
-
-// myLibrary.push(theWayOfKings, dracula);
-
-
-
-
-//    container.appendChild(bookCard);
-//    const jsonClean = JSON.stringify(myLibrary[i], null, 1);
-//    const unquoted = jsonClean.replace(/["{}]/g, ' ');
-//    bookCard.textContent = unquoted;
+// Book.prototype.toggleRead = function() {
+//   myLibrary.forEach((element) => {
+//     if (Book.read == true) {
+//       Book.read = !Book.read
+//    }
+//   }) 
+// }
