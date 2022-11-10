@@ -19,15 +19,15 @@ body {
     color: #D5DBDB;
     background-color: #1A5276;
     font-size: 3rem;
-    border: solid 2px #D5DBDB;
+    border: double 10px #D5DBDB;
+    transition: all 0.5s ease-out;
 }
 
 .newBookButton:hover {
-    border: solid 2px pink;
+    border: double 10px pink;
 }
 
 .newBookButton:active {
-    color: pink;
     transform: translate(2px, 2px);
 }
 
@@ -37,6 +37,9 @@ h1 {
     margin-top: 25vh;
     margin-bottom: 5vh;
     background-color: pink;
+    border-radius: 10px;
+    border: solid 2px #D5DBDB;
+    padding: 5px;
 }
 
 .popUpForm {
@@ -47,7 +50,7 @@ h1 {
     background: white;
     padding: 10px;
     border-radius: 6px;
-    border: solid 1px rgb(245, 113, 135);
+    border: solid 3px pink;
     color: #1A5276;
     background-color: #f6f9fa;
     width: 250px;
@@ -95,19 +98,20 @@ input:hover {
 .moveContainer {
     position: absolute;
     top: 15%;
-    left: 15%;
+    left: 12%;
     transform: translate(-50%, -50%) scale(0.7);
-    transition-duration: 1.5s;
+    transition-duration: 1s;
 }
 
 #containerCards {
     display: flex;
-    width: auto;
-    border: none;
+    flex-wrap: wrap;
 }
+
 .changePosition {
     margin-top: 15vh;
-    transition-duration: 1.5s;
+    margin-left: 20vw;
+    transition-duration: 1s;
     height: 40vh;
 }
 
@@ -124,6 +128,13 @@ input:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.divClose {
+    position: relative;
+    left: 43%;
+    bottom:  4%;
+    cursor: pointer;
 }
 
 .bookCard > div{

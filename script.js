@@ -26,12 +26,23 @@ submitBook.addEventListener('click', addBookToLibrary);
 const required = [...document.querySelectorAll('.required')];
 required.forEach(input => input.oninput = e =>
   submitBook.disabled = !required.every(input => input.value.length > 0));
+
+
+const popUpForm = document.querySelector('.popUpForm');
+popUpForm.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    submitBook.click();
+  }
+});
   
 function addBookToLibrary(e) {
   const userBook = getBookFromInput();
   myLibrary.push(userBook);
   showBooks();
   displayBooks();
+  required.forEach(input => {
+    input.value = '';
+  });
 }
 
 function showBooks () {
@@ -43,10 +54,21 @@ function showBooks () {
 
 const checkbox = document.querySelector('.read');
 
+counter = 0;
+
 function displayBooks () {
   for (const books of myLibrary.slice(-1)) {
     const divFather = document.createElement('div');
     divFather.classList.add('bookCard');
+    divFather.setAttribute('data-index', `${counter}`);
+    const divClose = document.createElement('span');
+    divClose.textContent = '❌';
+    divClose.classList.add('divClose');
+    divFather.appendChild(divClose);
+    divClose.addEventListener('click', () => {
+     delete myLibrary[divFather.dataset.index];
+     divFather.remove();
+    })
     const divOne = document.createElement('div');
     divOne.textContent = books.title;
     divFather.appendChild(divOne);
@@ -78,22 +100,12 @@ function displayBooks () {
     })
     divFather.appendChild(divFour);
     containerCards.appendChild(divFather);
+    counter++
+    console.log(divFather.dataset.index);
   }
 }
-
-
-  // divFour.addEventListener('click', toggleRead);
-
-  // Book.prototype.toggleRead = function() {
-  //   if (divFour.checkbox == true) {
-  //     divFather.classList.add('bookRead')
-  //   }
-  // }
-
-
   
 const newBookButton = document.querySelector('.newBookButton');
-const popUpForm = document.querySelector('.popUpForm');
 const container = document.querySelector('#container');
 
 newBookButton.addEventListener('click', openPopUp);
@@ -111,22 +123,11 @@ function closePopUp (e) {
   }
 }
 
-const theWayOfKings = new Book('The way of kings', 'Brandon Sanderson', 'Epic fantasy', '5', 1007, true)
-myLibrary.push(theWayOfKings);
-console.log(theWayOfKings.read)
+// const theWayOfKings = new Book('The way of kings', 'Brandon Sanderson', 'Epic fantasy', '5', 1007, true)
+// myLibrary.push(theWayOfKings);
 
 
 Book.prototype.toggleRead = function(user) {
 let filtered = myLibrary.filter(item => item.user === user);
 filtered.map(item => item.read = false);
 }
-
-
-
-// Book.prototype.toggleRead = function() {
-//   myLibrary.forEach((element) => {
-//     if (Book.read == true) {
-//       Book.read = !Book.read
-//    }
-//   }) 
-// }
