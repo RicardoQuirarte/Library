@@ -43,6 +43,7 @@ function addBookToLibrary(e) {
   required.forEach(input => {
     input.value = '';
   });
+  containerCards.classList.remove('blur');
 }
 
 function showBooks () {
@@ -62,7 +63,7 @@ function displayBooks () {
     divFather.classList.add('bookCard');
     divFather.setAttribute('data-index', `${counter}`);
     const divClose = document.createElement('span');
-    divClose.textContent = '❌';
+    divClose.textContent = '✘';
     divClose.classList.add('divClose');
     divFather.appendChild(divClose);
     divClose.addEventListener('click', () => {
@@ -101,7 +102,6 @@ function displayBooks () {
     divFather.appendChild(divFour);
     containerCards.appendChild(divFather);
     counter++
-    console.log(divFather.dataset.index);
   }
 }
   
@@ -113,21 +113,29 @@ window.addEventListener('mouseup', closePopUp)
 
 function openPopUp () {
   container.classList.add('blur');
+  containerCards.classList.add('blur');
   popUpForm.classList.add('openPopUp');
+  checkbox.checked = false;
 }
 
 function closePopUp (e) {
   if (e.target != popUpForm && e.target.parentNode != popUpForm) {
     container.classList.remove('blur');
-    popUpForm.classList.remove('openPopUp')
+    containerCards.classList.remove('blur');
+    popUpForm.classList.remove('openPopUp');
   }
 }
-
-// const theWayOfKings = new Book('The way of kings', 'Brandon Sanderson', 'Epic fantasy', '5', 1007, true)
-// myLibrary.push(theWayOfKings);
-
 
 Book.prototype.toggleRead = function(user) {
 let filtered = myLibrary.filter(item => item.user === user);
 filtered.map(item => item.read = false);
 }
+
+const theWayOfKings = new Book('The way of kings', 'Brandon Sanderson', 'Epic fantasy', '5', 1007, true)
+const dracula = new Book('The way of kings', 'Brandon Sanderson', 'Epic fantasy', '5', 1007, true)
+const elPadrino = new Book('The way of kings', 'Brandon Sanderson', 'Epic fantasy', '5', 1007, true)
+const nameOfTheWind = new Book('The way of kings', 'Brandon Sanderson', 'Epic fantasy', '5', 1007, true)
+const hello = new Book('The way of kings', 'Brandon Sanderson', 'Epic fantasy', '5', 1007, true)
+const world = new Book('The way of kings', 'Brandon Sanderson', 'Epic fantasy', '5', 1007, true)
+const tokioBlues = new Book('The way of kings', 'Brandon Sanderson', 'Epic fantasy', '5', 1007, true)
+myLibrary.push(theWayOfKings, dracula, elPadrino, nameOfTheWind, hello, world, tokioBlues);
