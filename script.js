@@ -1,12 +1,18 @@
 let myLibrary = [];
 
-function Book(title, author, genre, rating, pages, read) {
+class Book {
+  constructor (title, author, genre, rating, pages, read) {
     this.title = title
     this.author = author
     this.genre = genre
     this.rating = rating
     this.pages = pages
     this.read = read
+} 
+  toggleRead(user) {
+  let filtered = myLibrary.filter(item => item.user === user);
+  filtered.map(item => item.read = false);
+  }
 }
 
 function getBookFromInput() {
@@ -124,11 +130,6 @@ function closePopUp (e) {
     containerCards.classList.remove('blur');
     popUpForm.classList.remove('openPopUp');
   }
-}
-
-Book.prototype.toggleRead = function(user) {
-let filtered = myLibrary.filter(item => item.user === user);
-filtered.map(item => item.read = false);
 }
 
 const theWayOfKings = new Book('The way of kings', 'Brandon Sanderson', 'Epic fantasy', '5', 1007, true)
